@@ -5,6 +5,7 @@ import 'package:auth_app/features/browse/views/article.dart';
 import 'package:auth_app/features/home/views/home.dart';
 import 'package:auth_app/features/more/view/edit_profile.dart';
 import 'package:auth_app/features/more/view/write_article.dart';
+import 'package:auth_app/features/more/view/write_code.dart';
 import 'package:auth_app/features/more/view/your_articles.dart';
 import 'package:auth_app/models/article_model.dart';
 import 'package:auth_app/models/user_model.dart';
@@ -48,7 +49,12 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => const YourArticles(),
         );
-
+      case AppRouteNames.writeCode:
+        final arguments = settings.arguments as Map<String, dynamic>;
+        final currentUser = arguments['currentUser'] as UserModel;
+        return MaterialPageRoute(
+          builder: (_) => WriteCode(currentUser: currentUser),
+        );
       default:
         return MaterialPageRoute(builder: (_) => const SignIn());
     }
