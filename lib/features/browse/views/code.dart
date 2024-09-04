@@ -3,8 +3,12 @@ import 'package:auth_app/common/paths.dart';
 import 'package:auth_app/common/sizes.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_code_editor/flutter_code_editor.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+// ignore: depend_on_referenced_packages
+import 'package:highlight/languages/dart.dart';
 
+import '../../../common/constants.dart';
 import '../../../models/code_model.dart';
 
 class Code extends StatefulWidget {
@@ -17,6 +21,16 @@ class Code extends StatefulWidget {
 }
 
 class _CodeState extends State<Code> {
+  final CodeController controller = CodeController(
+    language: dart,
+  );
+
+  @override
+  void initState() {
+    controller.text = widget.code.code;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,14 +106,15 @@ class _CodeState extends State<Code> {
                       textAlign: TextAlign.justify,
                     ),
                   ),
-                  // CodeTheme(data: CodeThemeData(styles: myTheme),
-                  // child: SingleChildScrollView(
-                  //   child: CodeField(
-                  //     controller: controller,
-                  //     enabled:false,
-                  //     readOnly:true,
-                  //   ),
-                  // ))
+                  CodeTheme(
+                      data: CodeThemeData(styles: myTheme),
+                      child: SingleChildScrollView(
+                        child: CodeField(
+                          controller: controller,
+                          enabled: false,
+                          readOnly: false,
+                        ),
+                      ))
                 ],
               ),
             ))

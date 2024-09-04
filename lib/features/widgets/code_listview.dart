@@ -7,6 +7,7 @@ import '../../common/colors.dart';
 import '../../common/sizes.dart';
 import '../../models/code_model.dart';
 import '../../router/route_names.dart';
+import '../browse/controller/browse_controller.dart';
 
 class CodeListView extends ConsumerWidget {
   const CodeListView({
@@ -16,8 +17,7 @@ class CodeListView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return StreamBuilder<List<CodeModel>>(
-        //stream: ref.watch(browseControllerProvider).getCodes(),
-        stream: Stream.empty(),
+        stream: ref.watch(browseControllerProvider).getCodes(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(

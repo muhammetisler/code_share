@@ -74,8 +74,9 @@ class More extends ConsumerWidget {
                       ),
                       MenuItem(
                         title: "Your code repos",
-                        onTap: () {},
-                        leadingAsset: articleSvg,
+                        onTap: () => Navigator.pushNamed(
+                            context, AppRouteNames.yourCodeRepos),
+                        leadingAsset: codeSvg,
                       ),
                       _title("Profile"),
                       MenuItem(

@@ -35,6 +35,7 @@ class MoreRepository {
     await addSubCollection(
         "users", auth.currentUser!.uid, "articles", model.uid, model.toMap());
   }
+
   Future<void> writeCode(CodeModel model) async {
     await firebaseFirestore
         .collection("codes")
@@ -67,6 +68,16 @@ class MoreRepository {
         .map((snapshot) => snapshot.docs
             .map((doc) => ArticleModel.fromMap(doc.data()))
             .toList());
+  }
+
+  Stream<List<CodeModel>> getCodes() {
+    return firebaseFirestore
+        .collection("users")
+        .doc(auth.currentUser!.uid)
+        .collection("codes")
+        .snapshots()
+        .map((snapshot) =>
+            snapshot.docs.map((doc) => CodeModel.fromMap(doc.data())).toList());
   }
 
   Future<void> updateProfile(UserModel model) async {

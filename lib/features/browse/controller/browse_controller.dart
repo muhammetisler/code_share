@@ -1,5 +1,6 @@
 import 'package:auth_app/features/browse/repository/browse_repository.dart';
 import 'package:auth_app/models/article_model.dart';
+import 'package:auth_app/models/code_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final browseControllerProvider = Provider(
@@ -14,5 +15,9 @@ class BrowseController {
 
   Stream<List<ArticleModel>> getArticles() {
     return browseRepository.getArticles();
+  }
+
+  Stream<List<CodeModel>> getCodes() {
+    return browseRepository.getCodes();
   }
 }

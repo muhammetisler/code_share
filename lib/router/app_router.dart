@@ -2,12 +2,15 @@ import 'package:auth_app/features/auth/views/sign_in.dart';
 import 'package:auth_app/features/auth/views/sign_up.dart';
 import 'package:auth_app/features/auth/views/sign_up_info.dart';
 import 'package:auth_app/features/browse/views/article.dart';
+import 'package:auth_app/features/browse/views/code.dart';
 import 'package:auth_app/features/home/views/home.dart';
 import 'package:auth_app/features/more/view/edit_profile.dart';
 import 'package:auth_app/features/more/view/write_article.dart';
 import 'package:auth_app/features/more/view/write_code.dart';
 import 'package:auth_app/features/more/view/your_articles.dart';
+import 'package:auth_app/features/more/view/your_code_repos.dart';
 import 'package:auth_app/models/article_model.dart';
+import 'package:auth_app/models/code_model.dart';
 import 'package:auth_app/models/user_model.dart';
 import 'package:auth_app/router/route_names.dart';
 import 'package:flutter/material.dart';
@@ -39,6 +42,10 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => Article(article: article),
         );
+      case AppRouteNames.code:
+        final arguments = settings.arguments as Map<String,dynamic>;
+        final code = arguments['code'] as CodeModel;
+        return MaterialPageRoute(builder: (context) => Code(code: code),);
       case AppRouteNames.editProfile:
         final arguments = settings.arguments as Map<String, dynamic>;
         final currentUser = arguments['currentUser'] as UserModel;
@@ -55,6 +62,10 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => WriteCode(currentUser: currentUser),
         );
+      case AppRouteNames.yourCodeRepos:
+        return MaterialPageRoute(builder: (_) => const YourCodeRepos(),);
+
+
       default:
         return MaterialPageRoute(builder: (_) => const SignIn());
     }

@@ -30,6 +30,10 @@ class MoreController {
     return moreRepository.getArticles();
   }
 
+  Stream<List<CodeModel>> getCodes() {
+    return moreRepository.getCodes();
+  }
+
   Future<UserModel> getUser() async {
     return await moreRepository.getUser();
   }

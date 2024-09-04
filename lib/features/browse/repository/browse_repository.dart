@@ -1,4 +1,7 @@
 import 'package:auth_app/models/article_model.dart';
+import 'package:auth_app/models/code_model.dart';
+import 'package:auth_app/models/code_model.dart';
+import 'package:auth_app/models/code_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -25,6 +28,21 @@ class BrowseRepository {
         List<ArticleModel> list = [];
         for (var model in snapshot.docs) {
           list.add(ArticleModel.fromMap(model.data()));
+        }
+        return list;
+      },
+    );
+  }
+  Stream<List<CodeModel>> getCodes() {
+    return firebaseFirestore
+        .collection('codes')
+        .orderBy('createdAt', descending: true)
+        .snapshots()
+        .map(
+          (snapshot) {
+        List<CodeModel> list = [];
+        for (var model in snapshot.docs) {
+          list.add(CodeModel.fromMap(model.data()));
         }
         return list;
       },
